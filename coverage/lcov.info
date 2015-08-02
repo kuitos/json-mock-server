@@ -1,5 +1,5 @@
 TN:
-SF:/Users/Kuitos/快盘/Program/codes/kuitos/json-mock/src/index.js
+SF:/Users/Kuitos/快盘/Program/codes/kuitos/json-server-kuitos/src/index.js
 FN:4,(anonymous_1)
 FNF:1
 FNH:1
@@ -15,7 +15,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:/Users/Kuitos/快盘/Program/codes/kuitos/json-mock/src/defaults.js
+SF:/Users/Kuitos/快盘/Program/codes/kuitos/json-server-kuitos/src/defaults.js
 FN:11,(anonymous_1)
 FNF:1
 FNH:1
@@ -45,7 +45,7 @@ BRF:4
 BRH:2
 end_of_record
 TN:
-SF:/Users/Kuitos/快盘/Program/codes/kuitos/json-mock/src/router.js
+SF:/Users/Kuitos/快盘/Program/codes/kuitos/json-server-kuitos/src/router.js
 FN:14,(anonymous_1)
 FN:40,showDatabase
 FN:53,parse
@@ -277,7 +277,7 @@ BRF:66
 BRH:63
 end_of_record
 TN:
-SF:/Users/Kuitos/快盘/Program/codes/kuitos/json-mock/src/utils.js
+SF:/Users/Kuitos/快盘/Program/codes/kuitos/json-server-kuitos/src/utils.js
 FN:10,toNative
 FN:24,createId
 FN:28,(anonymous_3)
