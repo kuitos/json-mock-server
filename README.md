@@ -12,14 +12,15 @@
 3. 基于restful规范配置数据，node会根据url规则找到对应的资源实体，从而达到只配数据源不写一行js代码的目的。
 
 ## Params
-| param  | alias  | desc  | default |
-| -------------- | ---------------| ------------- | ---------- |
-| port | p | 本地服务器启动端口号 | 3000 |
-| host | h | 本地服务器启动host | 0.0.0.0 |
-| static | s | 静态服务器根路径 | public |
-| apiPrefix | ap | rest数据接口前缀 | 空 |
-| proxyHost | ph | 代理服务器地址（ip/域名，因为可能存在虚IP所以建议使用域名） |
-| proxyPort | pp | 代理服务器端口号 |
+| param  | alias  | desc  | reqiured |default |
+| -------------- | ---------------| ------------- | ---------- | ----|
+| apiPrefix | ap | rest数据接口前缀 | true| 空 |
+| port | p | 本地服务器启动端口号 | false |3000 |
+| host | h | 本地服务器启动host | false| 0.0.0.0 |
+| static | s | 静态服务器根路径 | false | public |
+| source | 无 | 本地mock数据源(若配置需在第一项) | | undefined |
+| proxyHost | ph | 代理服务器地址（ip/域名，因为可能存在虚IP所以建议使用域名） ||
+| proxyPort | pp | 代理服务器端口号 | |
 
 ## Specification
 1. **如果api设计的不够restful，可能本工具并不适合你的项目。**但是作为一个合格的前端工程师，是有义务去协同后端设计出符合标准的接口的。当然前提是你得熟悉restful接口设计规范。
