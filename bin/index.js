@@ -52,8 +52,24 @@ var argv = yargs
     .example('$0 db.json', '')
     .example('$0 file.js', '')
     .example('$0 http://example.com/db.json', '')
-    .require(1, 'Missing <source> argument')
+  //.require(1, 'Missing <source> argument')
     .argv
+
+if (!argv._[0]) {
+
+  if (argv.proxyHost || argv.proxyPort) {
+    if (!argv.proxyPort) {
+      yargs.require(1, 'Missing proxyPort argument').argv
+    }
+
+    if (!argv.proxyHost) {
+      yargs.require(1, 'Missing proxyHost argument').argv
+    }
+
+  } else {
+    yargs.require(1, 'Missing <source> argument').argv
+  }
+}
 
 // Start server function
 function start(object, filename) {
@@ -149,4 +165,8 @@ if (/^http/.test(source)) {
     var object = JSON.parse(data)
     start(object)
   })
+}
+
+if (!source) {
+  start({})
 }
