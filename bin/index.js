@@ -19,33 +19,34 @@ var argv = yargs
     .help('help').alias('help', 'h')
     .version(pkg.version, 'version').alias('version', 'v')
     .options({
-      port       : {
+      port     : {
         alias      : 'p',
         description: 'Set port',
         default    : 3000
       },
-      host       : {
+      host     : {
         alias      : 'H',
         description: 'Set host',
         default    : '0.0.0.0'
       },
-      "static"   : {
+      'static' : {
         alias      : 's',
         description: 'Set static file server directory',
         default    : 'public'
       },
-      "proxyHost": {
+      apiPrefix: {
+        alias      : 'ap',
+        description: 'Set your rest api prefix',
+        default    : ''
+      },
+      proxyHost: {
         alias      : 'ph',
         description: 'Set proxy server host',
         default    : ''
       },
-      "proxyPort": {
+      proxyPort: {
         alias      : 'pp',
         description: 'Set proxy server port'
-      },
-      "apiPrefix": {
-        alias      : 'ap',
-        description: 'Set your rest api prefix'
       }
     })
     .example('$0 db.json', '')
@@ -58,6 +59,7 @@ var argv = yargs
 function start(object, filename) {
   var port = process.env.PORT || argv.port
   var hostname = argv.host === '0.0.0.0' ? 'localhost' : argv.host
+  var apiPrefix = argv.apiPrefix || ''
 
   for (var prop in object) {
     console.log(chalk.gray('  http://' + hostname + ':' + port + '/') + chalk.cyan(prop))
@@ -82,20 +84,21 @@ function start(object, filename) {
   })
 
   if (filename) {
-    var router = jsonServer.router(filename)
+    var router = jsonServer.router(apiPrefix, filename)
   } else {
-    var router = jsonServer.router(object)
+    var router = jsonServer.router(apiPrefix, object)
   }
 
   var server = jsonServer.create()
 
-  // modify static server root dir if arg exist
+  // Serve static files
   var staticDir = argv.static || 'public'
   if (fs.existsSync(process.cwd() + staticDir)) {
-    jsonServer.defaults[jsonServer.defaults.length - 2] = express.static(process.cwd() + staticDir)
+    jsonServer.defaults.push(express.static(process.cwd() + staticDir))
   } else {
-    jsonServer.defaults[jsonServer.defaults.length - 2] = express.static(__dirname + staticDir)
+    jsonServer.defaults.push(express.static(__dirname + staticDir))
   }
+
   server.use(jsonServer.defaults)
 
   // if u has config proxy host, use proxy server to power your api
@@ -106,7 +109,7 @@ function start(object, filename) {
       throw new Error('pls config proxy host port');
     } else {
 
-      server.use(argv.apiPrefix + '/**', proxy(argv.proxyHost, {
+      server.use(apiPrefix + '/**', proxy(argv.proxyHost, {
         forwardPath: function (req, res) {
           return url.parse(req.originalUrl).path;
         },

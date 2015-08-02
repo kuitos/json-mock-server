@@ -11,13 +11,6 @@ arr.push(logger('dev', {
   skip: function(req, res) { return req.path === '/favicon.ico' }
 }))
 
-// Serve static files
-if (fs.existsSync(process.cwd() + '/public')) {
-  arr.push(express.static(process.cwd() + '/public'));
-} else {
-  arr.push(express.static(__dirname + '/public'));
-}
-
 // CORS
 arr.push(cors({ origin: true, credentials: true }))
 

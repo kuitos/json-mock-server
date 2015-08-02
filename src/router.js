@@ -11,7 +11,7 @@ low.mixin({
   createId: utils.createId
 })
 
-module.exports = function (source) {
+module.exports = function (apiPrefix, source) {
 
   // Create router
   var router = express.Router()
@@ -252,7 +252,7 @@ module.exports = function (source) {
 
   router.get('/db', showDatabase)
 
-  router.route('/:resource*')
+  router.route(apiPrefix + '/:resource*')
     .get(parse, find, present)
     .post(parse, create)
     .put(parse, update)
