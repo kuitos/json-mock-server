@@ -73,7 +73,7 @@ $ json-server-kuitos -s / --proxyHost 10.200.187.10 --proxyPort 3000 --apiPrefix
 { "id": 1, "name": "kuitos", "location": "China" }
 ```
 
-同样的，所有的 PUT/POST/DELETE 操作都会被持久化到 `db.json` 中
+**同样的，所有的 PUT/POST/DELETE 操作都会被持久化到 `db.json` 中**
 
 更多路由设计及调用方式，参见[json-mock](https://github.com/kuitos/json-mock)
 

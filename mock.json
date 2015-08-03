@@ -13,11 +13,11 @@
   ],
   "posts": [
     {
-      "id": 2,
-      "title": "json-mock",
+      "id": 3,
+      "title": "Kuitos",
       "body": "The internet is cool!",
       "author": "therebelrobot",
-      "userId": 1
+      "userId": 4
     }
   ],
   "comments": [
