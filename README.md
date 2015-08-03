@@ -56,9 +56,9 @@ $ npm install json-mock-kuitos -g
 
 ```bash
 # 本机mock
-$ json-server-kuitos db.json -s / 
+$ json-server-kuitos db.json -s / --apiPrefix /rest/bi
 
-# 调用远程服务器api
+# 如果后端接口已经开发好，使用代理直接连其他机器调用api作前后端联调
 $ json-server-kuitos -s / --proxyHost 10.200.187.10 --proxyPort 3000 --apiPrefix /rest/bi
 ```
 
