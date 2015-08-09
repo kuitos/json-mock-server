@@ -1,4 +1,4 @@
-# JSON Mock Kuitos
+# JSON Mock Server
 
 ## Goals
 
@@ -77,11 +77,38 @@ $ json-server-kuitos -s / --proxyHost 10.200.187.10 --proxyPort 3000 --apiPrefix
 
 更多路由设计及调用方式，参见[json-mock](https://github.com/kuitos/json-mock)
 
+## design mock data
+#### points
+1. 从url的后面往前面思考，资源的主体永远是url中最后一个复数单词。  
+	如```/users/1/comments```表示的是comments集合中所有userId=1的资源(数组)，```/users/1/comments/1```表示的roles集合中commentId=1而且userId=1的comment实体(对象)
+2. 想象自己是后端开发者，```/users/1/comments/1``` 对应的sql应该是
+
+	```sql
+	 select * from tb_user_roles where userId=1 and roleId=1;
+	```
+
+#### examples
+1. ```/users/1/comments```  return 
+	
+	```json
+	[
+    	{ "id": 1, "body": "some comment from author", "votes": 20, "postId": 1, "userId": 1 }
+  ]
+	```
+2. ```/users/1/comments/2```
+	return
+	
+	```json
+	{ "id": 2, "body": "some comment from visitor", "votes": 15, "postId": 1, "userId": 1 }
+	```
+
+
 ## Todo
 1. 目前只支持mock单文件数据，后续需支持指定文件夹下所有json文件（通过concat文件夹下所有json文件生成单一db.json的方式）
-2. 只支持两级资源嵌套。但是依照规范restful应该只支持两级。目前当配置多级时也只有前两级生效。如 /users/1/posts/1/comments/ 表示postId == 1 的所有comment实体。要不要修复看心情吧😄
-3. hotloader：watch(dir)-->server.restart()
-4. /users/1/name 不支持对单个属性的 get/put
+2. hotloader：watch(dir)-->server.restart()
+3. /users/1/name 不支持对单个属性的 get/put
+4. 不支持资源ID映射配置。```/users/1/roles/2```必须是```{id:2,userId:1}```才能匹配到，	```{roleId:2,userId:1}```不会匹配。解决方案就是，多加一个名字不一样但是值一	样的属性。```{id:2,roleId:2,userId:2}```  
+5. 只支持两级资源嵌套。但是依照规范restful应该只支持两级。目前当配置多级时也只有前两级生效。如 /users/1/posts/1/comments/ 表示postId == 1 的所有comment实体。要不要修复看心情吧😄
 
 欢迎各路英雄提交PR帮助作者改善此工具
 
