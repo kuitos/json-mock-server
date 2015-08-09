@@ -77,7 +77,7 @@ $ json-server-kuitos -s / --proxyHost 10.200.187.10 --proxyPort 3000 --apiPrefix
 
 更多路由设计及调用方式，参见[json-mock](https://github.com/kuitos/json-mock)
 
-## design mock data
+## Design Mock Data
 #### points
 1. 从url的后面往前面思考，资源的主体永远是url中最后一个复数单词。  
 	如```/users/1/comments```表示的是comments集合中所有userId=1的资源(数组)，```/users/1/comments/1```表示的roles集合中commentId=1而且userId=1的comment实体(对象)
