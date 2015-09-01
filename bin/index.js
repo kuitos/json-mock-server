@@ -57,13 +57,13 @@ var argv = yargs
 
 if (!argv._[0]) {
 
-  if (argv.proxyHost || argv.proxyPort) {
-    if (!argv.proxyPort) {
-      yargs.require(1, 'Missing proxyPort argument').argv
+  if (argv['proxy-host'] || argv['proxy-port']) {
+    if (!argv['proxy-port']) {
+      yargs.require(1, 'Missing proxy-port argument').argv
     }
 
-    if (!argv.proxyHost) {
-      yargs.require(1, 'Missing proxyHost argument').argv
+    if (!argv['proxy-host']) {
+      yargs.require(1, 'Missing proxy-host argument').argv
     }
 
   } else {
@@ -75,7 +75,7 @@ if (!argv._[0]) {
 function start(object, filename) {
   var port = process.env.PORT || argv.port
   var hostname = argv.host === '0.0.0.0' ? 'localhost' : argv.host
-  var apiPrefix = argv.apiPrefix || ''
+  var apiPrefix = argv['api-prefix'] || ''
 
   for (var prop in object) {
     console.log(chalk.gray('  http://' + hostname + ':' + port + '/') + chalk.cyan(prop))
@@ -119,18 +119,18 @@ function start(object, filename) {
 
   // if u has config proxy host, use proxy server to power your api
   // else we use db.json to mock api
-  if (argv.proxyHost) {
+  if (argv['proxy-host']) {
 
-    if (!argv.proxyPort) {
+    if (!argv['proxy-port']) {
       throw new Error('pls config proxy host port');
     } else {
 
-      server.use(apiPrefix + '/**', proxy(argv.proxyHost, {
+      server.use(apiPrefix + '/**', proxy(argv['proxy-host'], {
         forwardPath: function (req, res) {
           return url.parse(req.originalUrl).path;
         },
 
-        port: argv.proxyPort
+        port: argv['proxy-port']
       }))
     }
 
