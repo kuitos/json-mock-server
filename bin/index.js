@@ -15,45 +15,45 @@ updateNotifier({packageName: pkg.name, packageVersion: pkg.version}).notify()
 
 // Parse arguments
 var argv = yargs
-    .usage('$0 <source>')
-    .help('help').alias('help', 'h')
-    .version(pkg.version, 'version').alias('version', 'v')
-    .options({
-      port     : {
-        alias      : 'p',
-        description: 'Set port',
-        default    : 3000
-      },
-      host     : {
-        alias      : 'H',
-        description: 'Set host',
-        default    : '0.0.0.0'
-      },
-      'static' : {
-        alias      : 's',
-        description: 'Set static file server directory',
-        default    : 'public'
-      },
-      apiPrefix: {
-        alias      : 'ap',
-        description: 'Set your rest api prefix',
-        default    : ''
-      },
-      proxyHost: {
-        alias      : 'ph',
-        description: 'Set proxy server host',
-        default    : ''
-      },
-      proxyPort: {
-        alias      : 'pp',
-        description: 'Set proxy server port'
-      }
-    })
-    .example('$0 db.json', '')
-    .example('$0 file.js', '')
-    .example('$0 http://example.com/db.json', '')
+  .usage('$0 <source>')
+  .help('help').alias('help', 'h')
+  .version(pkg.version, 'version').alias('version', 'v')
+  .options({
+    port        : {
+      alias      : 'p',
+      description: 'Set port',
+      default    : 3000
+    },
+    host        : {
+      alias      : 'H',
+      description: 'Set host',
+      default    : '0.0.0.0'
+    },
+    'static'    : {
+      alias      : 's',
+      description: 'Set static file server directory',
+      default    : 'public'
+    },
+    'api-prefix': {
+      alias      : 'ap',
+      description: 'Set your rest api prefix',
+      default    : ''
+    },
+    'proxy-host': {
+      alias      : 'ph',
+      description: 'Set proxy server host',
+      default    : ''
+    },
+    'proxy-port': {
+      alias      : 'pp',
+      description: 'Set proxy server port'
+    }
+  })
+  .example('$0 db.json', '')
+  .example('$0 file.js', '')
+  .example('$0 http://example.com/db.json', '')
   //.require(1, 'Missing <source> argument')
-    .argv
+  .argv
 
 if (!argv._[0]) {
 
@@ -82,11 +82,11 @@ function start(object, filename) {
   }
 
   console.log(
-      '\nYou can now go to ' + chalk.gray('http://' + hostname + ':' + port + '/\n')
+    '\nYou can now go to ' + chalk.gray('http://' + hostname + ':' + port + '/\n')
   )
 
   console.log(
-      'Enter ' + chalk.cyan('`s`') + ' at any time to create a snapshot of the db\n'
+    'Enter ' + chalk.cyan('`s`') + ' at any time to create a snapshot of the db\n'
   )
 
   process.stdin.resume()
