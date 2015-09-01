@@ -14,13 +14,13 @@
 ## Params
 | param  | alias  | desc  | reqiured |default |
 | -------------- | ---------------| ------------- | ---------- | ----|
-| apiPrefix | ap | rest数据接口前缀 | true| 空 |
+| api-prefix | ap | rest数据接口前缀 | true| 空 |
 | port | p | 本地服务器启动端口号 | false |3000 |
 | host | h | 本地服务器启动host | false| 0.0.0.0 |
 | static | s | 静态服务器根路径 | false | public |
 | source | 无 | 本地mock数据源(若配置需在第一项) | | undefined |
-| proxyHost | ph | 代理服务器地址（ip/域名，因为可能存在虚IP所以建议使用域名） ||
-| proxyPort | pp | 代理服务器端口号 | |
+| proxy-host | ph | 代理服务器地址（ip/域名，因为可能存在虚IP所以建议使用域名） ||
+| proxy-port | pp | 代理服务器端口号 | |
 
 ## Specification
 1. **如果api设计的不够restful，可能本工具并不适合你的项目。**但是作为一个合格的前端工程师，是有义务去协同后端设计出符合标准的接口的。当然前提是你得熟悉restful接口设计规范。
@@ -59,7 +59,7 @@ $ npm install json-mock-kuitos -g
 $ json-server-kuitos db.json -s / --apiPrefix /rest/bi
 
 # 如果后端接口已经开发好，使用代理直接连其他机器调用api作前后端联调
-$ json-server-kuitos -s / --proxyHost 10.200.187.10 --proxyPort 3000 --apiPrefix /rest/bi
+$ json-server-kuitos -s / --proxy-host 10.200.187.10 --proxy-port 3000 --api-prefix /rest/bi
 ```
 
 当你访问 [http://localhost:3000/posts/1](http://localhost:3000/posts/1), 返回值为
