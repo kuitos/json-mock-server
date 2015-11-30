@@ -29,6 +29,7 @@
     "husky": "^0.6.1",
     "istanbul": "^0.3.14",
     "mocha": "^2.2.4",
+    "object-assign": "^4.0.1",
     "supertest": "~0.8.1"
   },
   "scripts": {

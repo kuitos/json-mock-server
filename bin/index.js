@@ -24,12 +24,12 @@ var argv = yargs
       description: 'Set port',
       default    : 3000
     },
-    host        : {
+    host: {
       alias      : 'H',
       description: 'Set host',
       default    : '0.0.0.0'
     },
-    'static'    : {
+    'static': {
       alias      : 's',
       description: 'Set static file server directory',
       default    : 'public'
@@ -110,12 +110,12 @@ function start(object, filename) {
   // Serve static files
   var staticDir = argv.static || 'public'
   if (fs.existsSync(process.cwd() + staticDir)) {
-    jsonServer.defaults.push(express.static(process.cwd() + staticDir))
+    staticDir = process.cwd() + staticDir
   } else {
-    jsonServer.defaults.push(express.static(__dirname + staticDir))
+    staticDir = __dirname + staticDir
   }
 
-  server.use(jsonServer.defaults)
+  server.use(jsonServer.defaults({static: staticDir}))
 
   // if u has config proxy host, use proxy server to power your api
   // else we use db.json to mock api
