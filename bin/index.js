@@ -6,9 +6,6 @@ var chalk = require('chalk')
 var got = require('got')
 var pkg = require('../package.json')
 var jsonServer = require('../src')
-var express = require('express')
-var proxy = require('express-http-proxy')
-var url = require('url')
 var fs = require('fs')
 
 updateNotifier({packageName: pkg.name, packageVersion: pkg.version}).notify()
@@ -33,6 +30,11 @@ var argv = yargs
       alias      : 's',
       description: 'Set static file server directory',
       default    : 'public'
+    },
+    'context': {
+      alias      : 'c',
+      description: 'Set static file server context',
+      default    : '/'
     },
     'api-prefix': {
       alias      : 'ap',
@@ -115,7 +117,7 @@ function start(object, filename) {
     staticDir = __dirname + staticDir
   }
 
-  server.use(jsonServer.defaults({static: staticDir}))
+  server.use(argv['context'] || '/', jsonServer.defaults({static: staticDir}))
 
   // if u has config proxy host, use proxy server to power your api
   // else we use db.json to mock api
@@ -125,13 +127,13 @@ function start(object, filename) {
       throw new Error('pls config proxy host port');
     } else {
 
-      server.use(apiPrefix + '/**', proxy(argv['proxy-host'], {
-        forwardPath: function (req, res) {
-          return url.parse(req.originalUrl).path;
-        },
+      if(apiPrefix.trim()){
+        server.use(apiPrefix + '/**', jsonServer.proxy(argv['proxy-host'], argv['proxy-port']));
+      } else {
+        server.use(/^(?!.*\.\w*(\?.*)?$).+$/, jsonServer.proxy(argv['proxy-host'], argv['proxy-port']));
+      }
 
-        port: argv['proxy-port']
-      }))
+
     }
 
   } else {
