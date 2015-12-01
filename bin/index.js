@@ -127,12 +127,15 @@ function start(object, filename) {
       throw new Error('pls config proxy host port');
     } else {
 
-      if(apiPrefix.trim()){
-        server.use(apiPrefix + '/**', jsonServer.proxy(argv['proxy-host'], argv['proxy-port']));
-      } else {
-        server.use(/^(?!.*\.\w*(\?.*)?$).+$/, jsonServer.proxy(argv['proxy-host'], argv['proxy-port']));
-      }
+      var proxyServer = jsonServer.proxy(argv['proxy-host'], argv['proxy-port']);
 
+      if (apiPrefix.trim()) {
+        server.use(apiPrefix + '/**', proxyServer);
+      } else {
+
+        var STATIC_FILES = /^(?!.*\.\w*(\?.*)?$).+$/;
+        server.use(STATIC_FILES, proxyServer);
+      }
 
     }
 

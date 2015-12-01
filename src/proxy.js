@@ -11,6 +11,7 @@ module.exports = function (proxyHost, proxyPort) {
 
   return proxy(proxyHost, {
     forwardPath: function (req, res) {
+      console.log('%s %s is redirecting to %s:%s', req.method, req.originalUrl, proxyHost, proxyPort);
       return url.parse(req.originalUrl).path;
     },
 
