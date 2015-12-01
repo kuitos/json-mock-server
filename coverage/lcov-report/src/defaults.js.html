@@ -12,13 +12,13 @@
     </style>
 </head>
 <body>
-<div class="header high">
+<div class="header medium">
     <h1>Code coverage report for <span class="entity">src/defaults.js</span></h1>
     <h2>
-        Statements: <span class="metric">86.67% <small>(13 / 15)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Branches: <span class="metric">50% <small>(2 / 4)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Functions: <span class="metric">100% <small>(1 / 1)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        Lines: <span class="metric">86.67% <small>(13 / 15)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">76.92% <small>(20 / 26)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">37.5% <small>(3 / 8)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">33.33% <small>(1 / 3)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">76.92% <small>(20 / 26)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
     <div class="path"><a href="../index.html">All files</a> &#187; <a href="index.html">src/</a> &#187; defaults.js</div>
@@ -53,68 +53,134 @@
 26
 27
 28
-29</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">28</span>
+<span class="cline-any cline-yes">28</span>
 <span class="cline-any cline-yes">28</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">28</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">28</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">28</span>
+<span class="cline-any cline-yes">28</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1</span></td><td class="text"><pre class="prettyprint lang-js">var fs = require('fs')
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">28</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">28</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">28</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">28</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">28</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var fs = require('fs')
+var path = require('path')
 var express = require('express')
 var logger = require('morgan')
 var cors = require('cors')
 var errorhandler = require('errorhandler')
+var objectAssign = require('object-assign')
 &nbsp;
-var arr = []
+module.exports = function (opts) {
+  var userDir = path.join(process.cwd(), 'public')
+  var defaultDir = path.join(__dirname, 'public')
+  var staticDir = fs.existsSync(userDir) ?
+<span class="branch-0 cbranch-no" title="branch not covered" >    userDir </span>:
+    defaultDir
 &nbsp;
-// Logger
-arr.push(logger('dev', {
-  skip: function(req, res) { return req.path === '/favicon.ico' }
-}))
+  opts = objectAssign({ logger: true, static: staticDir }, opts)
 &nbsp;
-// Serve static files
-<span class="missing-if-branch" title="if path not taken" >I</span>if (fs.existsSync(process.cwd() + '/public')) {
-<span class="cstat-no" title="statement not covered" >  arr.push(express.static(process.cwd() + '/public'));</span>
-} else {
-  arr.push(express.static(__dirname + '/public'));
-}
+  var arr = []
 &nbsp;
-// CORS
-arr.push(cors({ origin: true, credentials: true }))
+  // Logger
+  <span class="missing-if-branch" title="else path not taken" >E</span>if (opts.logger) {
+    arr.push(logger('dev', {
+      skip: <span class="fstat-no" title="function not covered" >function (req, res) {</span>
+<span class="cstat-no" title="statement not covered" >        return process.env.NODE_ENV === 'test' ||</span>
+          req.path === '/favicon.ico'
+      }
+    }))
+  }
 &nbsp;
-<span class="missing-if-branch" title="if path not taken" >I</span>if (process.env.NODE_ENV === 'development') {
-  // only use in development
-<span class="cstat-no" title="statement not covered" >  arr.push(errorhandler())</span>
-}
+  // Enable CORS for all the requests, including static files
+  arr.push(cors({ origin: true, credentials: true }))
 &nbsp;
-module.exports = arr</pre></td></tr>
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (process.env.NODE_ENV === 'development') {
+    // only use in development
+<span class="cstat-no" title="statement not covered" >    arr.push(errorhandler())</span>
+  }
+&nbsp;
+  // Serve static files
+  arr.push(express.static(opts.static))
+&nbsp;
+  // No cache for IE
+  // https://support.microsoft.com/en-us/kb/234067
+  arr.push(<span class="fstat-no" title="function not covered" >function (req, res, next) {</span>
+<span class="cstat-no" title="statement not covered" >    res.header('Cache-Control', 'no-cache')</span>
+<span class="cstat-no" title="statement not covered" >    res.header('Pragma', 'no-cache')</span>
+<span class="cstat-no" title="statement not covered" >    res.header('Expires', '-1')</span>
+<span class="cstat-no" title="statement not covered" >    next()</span>
+  })
+&nbsp;
+  return arr
+}</pre></td></tr>
 </table></pre>
 
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sun Aug 02 2015 17:53:58 GMT+0800 (CST)</div>
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Nov 30 2015 23:25:47 GMT+0800 (CST)</div>
 </div>
 <script src="../prettify.js"></script>
 <script>
