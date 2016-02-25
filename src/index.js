@@ -7,7 +7,7 @@ module.exports = {
     return server
   },
   defaults: require('./defaults'),
-  STATIC_FILES: /^(?!.*\.\w*(\?.*)?$).+$/,
+  NON_STATIC_FILE: /^(?!.*\.\w*(\?.*)?$).+$/,
   router: require('./router'),
   proxy: require('./proxy')
 }

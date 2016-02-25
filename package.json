@@ -1,6 +1,6 @@
 {
   "name": "json-mock-kuitos",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Mock a REST API using just JSON. An advanced fork of typicode/json-server",
   "main": "./src/index.js",
   "bin": "./bin/index.js",
