@@ -132,9 +132,7 @@ function start(object, filename) {
       if (apiPrefix.trim()) {
         server.use(apiPrefix + '/**', proxyServer);
       } else {
-
-        var STATIC_FILES = /^(?!.*\.\w*(\?.*)?$).+$/;
-        server.use(STATIC_FILES, proxyServer);
+        server.use(jsonServer.STATIC_FILES, proxyServer);
       }
 
     }
