@@ -56,10 +56,10 @@ $ npm install json-mock-kuitos -g
 
 ```bash
 # 本机mock
-$ json-server-kuitos db.json -s / --apiPrefix /rest/bi
+$ json-mock-kuitos db.json -s / --apiPrefix /rest/bi
 
 # 如果后端接口已经开发好，使用代理直接连其他机器调用api作前后端联调
-$ json-server-kuitos -s / --proxy-host 10.200.187.10 --proxy-port 3000 --api-prefix /rest/bi
+$ json-mock-kuitos -s / --proxy-host 10.200.187.10 --proxy-port 3000 --api-prefix /rest/bi
 ```
 
 当你访问 [http://localhost:3000/posts/1](http://localhost:3000/posts/1), 返回值为
