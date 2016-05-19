@@ -21,6 +21,7 @@
 | source | 无 | 本地mock数据源(若配置需在第一项) | | undefined |
 | proxy-host | ph | 代理服务器地址（ip/域名，因为可能存在虚IP所以建议使用域名） ||
 | proxy-port | pp | 代理服务器端口号 | |
+| limit | l | 请求体大小限制 | |
 
 ## Specification
 1. **如果api设计的不够restful，可能本工具并不适合你的项目。**但是作为一个合格的前端工程师，是有义务去协同后端设计出符合标准的接口的。当然前提是你得熟悉restful接口设计规范。
