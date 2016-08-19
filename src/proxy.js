@@ -6,17 +6,17 @@
 
 var proxy = require('express-http-proxy');
 var url = require('url')
+var assign = require('object-assign');
 
-module.exports = function (proxyHost, proxyPort, bodyLimit) {
+module.exports = function(proxyHost, proxyPort, otherOptions) {
 
-	return proxy(proxyHost, {
-		forwardPath: function (req, res) {
+	return proxy(proxyHost, assign({
+		forwardPath: function(req, res) {
 			console.log('%s %s is redirecting to %s:%s', req.method, req.originalUrl, proxyHost, proxyPort);
 			return url.parse(req.originalUrl).path;
 		},
 
-		port: proxyPort,
-		limit: bodyLimit || '1mb'
-	})
+		port: proxyPort
+	}, otherOptions))
 
 };

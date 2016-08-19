@@ -131,7 +131,9 @@ function start(object, filename) {
 			throw new Error('pls config proxy host port');
 		} else {
 
-			var proxyServer = jsonServer.proxy(argv['proxy-host'], argv['proxy-port'], argv['limit']);
+			var proxyServer = jsonServer.proxy(argv['proxy-host'], argv['proxy-port'], {
+				limit: argv['limit']
+			});
 
 			if (apiPrefix.trim()) {
 				server.use(apiPrefix + '/**', proxyServer);
