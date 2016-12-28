@@ -4,6 +4,7 @@ var bodyParser = require('body-parser')
 var _ = require('underscore')
 var low = require('lowdb')
 var utils = require('./utils')
+var path = require('path')
 
 low.mixin(require('underscore-db'))
 low.mixin(require('underscore.inflections'))
@@ -15,6 +16,17 @@ module.exports = function (apiPrefix, source) {
 
   // Create router
   var router = express.Router()
+
+  if(!source) {
+    const glob = require('glob');
+    glob(apiPrefix + '/**/*.js', {}, function (er, modules) {
+      modules.forEach(module => {
+          require(module)(router);
+      });
+    });
+
+    return router;
+  }
 
   // Add middlewares
   router.use(bodyParser.json({
