@@ -17,17 +17,6 @@ module.exports = function (apiPrefix, source) {
   // Create router
   var router = express.Router()
 
-  if(!source) {
-    const glob = require('glob');
-    glob(apiPrefix + '/**/*.js', {}, function (er, modules) {
-      modules.forEach(module => {
-          require(module)(router);
-      });
-    });
-
-    return router;
-  }
-
   // Add middlewares
   router.use(bodyParser.json({
     limit: '10mb'
@@ -36,6 +25,17 @@ module.exports = function (apiPrefix, source) {
     extended: false
   }))
   router.use(methodOverride())
+
+  if(!source) {
+    const glob = require('glob');
+    glob(apiPrefix + '/**/*.js', {}, function (er, modules) {
+        modules.forEach(module => {
+            require(module)(router);
+        });
+    });
+
+    return router;
+  }
 
   // Create database
   if (_.isObject(source)) {
